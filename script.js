@@ -122,7 +122,7 @@ function Remodelar(REbutton){
     var buttonAntigg=document.getElementById(id);
     buttonAntigg.innerHTML="+";
     buttonAntigg.style.backgroundColor="rgba(0, 107, 247, 0.87)";
-    totaPopu=totaPopu+repositoriosPaisesFavoritos[id].populacao;
+    totaPopu=totaPopu+repositoriosPaisesFavoritos[elementoo].populacao;
 totalP+=1;
 totallpaiss.innerHTML=totalP;
 totallpaisspopu.innerHTML=totaPopu;
