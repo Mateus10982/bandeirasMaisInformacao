@@ -69,7 +69,7 @@ function proc(repositoriosPaises){
             let el=repositoriosPaisesFavoritos.findIndex(x=> x.id == repositoriosPaises[i].id);
             if(!el){
                 let buttonn=document.createElement("button");
-                buttonn.value=repositoriosPaises[i].id;    buttonn.className="favorito";    buttonn.id=repositoriosPaises[i].id;    buttonn.innerHTML="favoritado";    buttonn.type="button";    buttonn.style.background="red";     buttonn.style.width="18%";
+                buttonn.value=repositoriosPaises[i].id;    buttonn.className="favorito";    buttonn.id=repositoriosPaises[i].id;    buttonn.innerHTML="favoritado";    buttonn.type="button";    buttonn.style.background="red"; 
                 tela.appendChild(buttonn);
                 buttonn.addEventListener("click", x=>modelar(buttonn));
             }else{
