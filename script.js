@@ -64,15 +64,18 @@ function proc(repositoriosPaises){
         if(procura.value == repositoriosPaises[i].Nome){
             tela.innerHTML=`<img src="${repositoriosPaises[i].bandeira}" id="Bandeira" alt="Bandeira do pais"><table>
             <tr><td>Nome :</td> <td class="info">${repositoriosPaises[i].Nome}</td> </tr>  <tr> <td>Nome nativo:</td><td class="info">${repositoriosPaises[i].NomeNativo}</td></tr> <tr> <td>Tradução do nome para pt-br:</td><td class="info">${repositoriosPaises[i].TraducaoNome}</td> </tr><tr> <td> Sigla de 2 letras:</td><td class="info">${repositoriosPaises[i].sigla2}</td> </tr> <tr>   <td>Sigla de 3 letras:</td>  <td class="info">${repositoriosPaises[i].sigla3}</td> </tr> </table> <table id="table2">     <tr>         <td>Capital :</td>  <td class="info">${repositoriosPaises[i].capital}</td>      </tr>      <tr> <td>Linguagem:</td>    <td class="info">${repositoriosPaises[i].linguagens}</td>  </tr> <tr>         <td>População :</td>  <td class="info">${repositoriosPaises[i].populacao}</td>      </tr></table> `;
-            let buttonn=document.createElement("button");
-            buttonn.value=repositoriosPaises[i].id;
-            buttonn.className="favorito";
-            buttonn.id=repositoriosPaises[i].id;
-            buttonn.innerHTML="+";
-            buttonn.type="button";
-            tela.appendChild(buttonn);
-            buttonn.addEventListener("click", x=>modelar(buttonn));
-            
+            let el=repositoriosPaisesFavoritos.findIndex(x=> x.id == repositoriosPaises[i].id);
+            if(!el){
+                let buttonn=document.createElement("button");
+                buttonn.value=repositoriosPaises[i].id;    buttonn.className="favorito";    buttonn.id=repositoriosPaises[i].id;    buttonn.innerHTML="favoritado";    buttonn.type="button";    buttonn.style.background="red";     buttonn.style.width="18%";
+                tela.appendChild(buttonn);
+                buttonn.addEventListener("click", x=>modelar(buttonn));
+            }else{
+                let buttonn=document.createElement("button");
+                buttonn.value=repositoriosPaises[i].id;    buttonn.className="favorito";    buttonn.id=repositoriosPaises[i].id;    buttonn.innerHTML="+";    buttonn.type="button";
+                tela.appendChild(buttonn);
+                buttonn.addEventListener("click", x=>modelar(buttonn));
+            }
                                    break;
         }
     }
@@ -81,6 +84,7 @@ function proc(repositoriosPaises){
 function modelar(buttonn){
     let id=buttonn.value;
     var inde=false;
+    var buttonAntigo=document.getElementById(id);  buttonAntigo.innerHTML="favoritado";  buttonAntigo.style.background="red";   buttonAntigo.style.width="18%";
     for(let i=0; i< repositoriosPaisesFavoritos.length; ++i){ if(repositoriosPaisesFavoritos[i].id == id){inde=true; break;}}
     if(!inde){
     repositoriosPaisesFavoritos.push(repositoriosPaises[id]); let favv=new Object; 
@@ -101,10 +105,15 @@ function modelar(buttonn){
     REbutton.innerHTML="--";
     REbutton.type="button";
     listt.appendChild(REbutton);
-REbutton.addEventListener("click", x=>Remodelar(REbutton));somaPopulacaofav(repositoriosPaisesFavoritosTotal);}console.log(repositoriosPaisesFavoritosTotal); }
+REbutton.addEventListener("click", x=>Remodelar(REbutton));somaPopulacaofav(repositoriosPaisesFavoritosTotal);}}
 
 function Remodelar(REbutton){
+   
     let id=REbutton.value; let elementoo=repositoriosPaisesFavoritos.findIndex(x=> x.id == id); let yuki=repositoriosPaisesFavoritosTotal.findIndex(y=> y.id == id);
+    var buttonAntigg=document.getElementById(id);
+    buttonAntigg.innerHTML="+";
+    buttonAntigg.style.backgroundColor="rgba(0, 107, 247, 0.87)";
+    buttonAntigg.style.width="5%";
 repositoriosPaisesFavoritos.splice(elementoo,1);repositoriosPaisesFavoritosTotal.splice(yuki,1);
 telaSuaLista.innerHTML=`<ul id="telaSuaLista1"><li>Bandeira</li><li>Nome</li><li>População</li><button type="button" id="enfeite"></button></ul>`;
 for(let i=0; i<repositoriosPaisesFavoritos.length;++i){   let listt=document.createElement("ul");
@@ -117,11 +126,3 @@ REbutton.addEventListener("click", x=>Remodelar(REbutton));
 function popula2(TotalPaises,totalPopu){
     telaclasmudi.innerHTML=`<table id="table3">     <tr>    <td class="info22">População Mundial:</td>      <td class="info2" >${totalPopu}</td>       </tr> <tr>  <td class="info22">Total de paises :</td>  <td class="info2">${TotalPaises}</td></tr></table>`;
 }
-/*<ul class="telaSuaLista2">       <li><img class="conteiIMG" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Flag_of_the_Taliban.svg/320px-Flag_of_the_Taliban.svg.png"></li>       <li>Nome</li>       <li>População</li></ul>*/
-/////________________________________________________
-/* telaSuaLista.innerHTML+=`<ul id="m${repositoriosPaises[id].id}" class="telaSuaLista2">
-    <li><img class="conteiIMG" src="${repositoriosPaises[id].bandeira}"></li>
-    <li>${repositoriosPaises[id].Nome}</li>
-    <li>${repositoriosPaises[id].populacao}</li>
-    <button id="m${repositoriosPaises[id].id}"type="button" class="retirarFav" value="${repositoriosPaises[id].id}">--</button></ul> `; 
-    */
