@@ -96,7 +96,8 @@
     }
     .favorito{
         position: absolute;
-        width: 5%;
+        min-width: 5%;
+        max-width: 18%;
         height: 7%;
         top: 0.6%;
         left:0.6%;
