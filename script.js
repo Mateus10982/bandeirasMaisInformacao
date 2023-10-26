@@ -12,7 +12,7 @@ var telaSuaLista=document.getElementById("telaSuaLista");
 var telaclasmudi=document.getElementById("telaclasmudi");
 var populaFavoritResultadoquan=document.getElementById("populaFavoritResultadoquan");
 var populaFavoritResultado=document.getElementById("populaFavoritResultado");
-var totalPopulacao=[]; var totalPopu; var totalPopufavorite;
+var totalPopulacao=[]; var totalPopu; var totalPopufavorite; var totalP; var totaPopu;
 paiss(http);
 /////________________________________________________
 //eventos
@@ -42,6 +42,8 @@ function paiss(http){
         somaPopulacao(totalPopulacao);
         var TotalPaises=repositoriosPaises.length;
         popula2(TotalPaises,totalPopu);
+        totaPopu=totalPopu;
+        totalP=TotalPaises;
     });}
     function somaPopulacao(x){
        totalPopu=x.reduce(function soma(x, y) {
@@ -82,9 +84,11 @@ function proc(repositoriosPaises){
 }//imprimir resultados
 /**/
 function modelar(buttonn){
+    let totallpaiss=document.getElementById("totallpaiss");
+    let totallpaisspopu=document.getElementById("totallpaisspopu");
     let id=buttonn.value;
     var inde=false;
-    var buttonAntigo=document.getElementById(id);  buttonAntigo.innerHTML="favoritado";  buttonAntigo.style.background="red";   buttonAntigo.style.width="18%";
+    var buttonAntigo=document.getElementById(id);  buttonAntigo.innerHTML="favoritado";  buttonAntigo.style.background="red";   
     for(let i=0; i< repositoriosPaisesFavoritos.length; ++i){ if(repositoriosPaisesFavoritos[i].id == id){inde=true; break;}}
     if(!inde){
     repositoriosPaisesFavoritos.push(repositoriosPaises[id]); let favv=new Object; 
@@ -98,6 +102,10 @@ function modelar(buttonn){
     <li>${repositoriosPaises[id].populacao}</li>
     <button id="m${repositoriosPaises[id].id}"type="button" class="retirarFav" value="${repositoriosPaises[id].id}">--</button>`;
     telaSuaLista.appendChild(listt);
+    totaPopu= totaPopu-repositoriosPaises[id].populacao;
+    totalP-=1;
+    totallpaiss.innerHTML=totalP;
+    totallpaisspopu.innerHTML=totaPopu;
     let REbutton=document.createElement("button");
     REbutton.value=repositoriosPaises[id].id;
     REbutton.className="retirarFav";
@@ -108,12 +116,16 @@ function modelar(buttonn){
 REbutton.addEventListener("click", x=>Remodelar(REbutton));somaPopulacaofav(repositoriosPaisesFavoritosTotal);}}
 
 function Remodelar(REbutton){
-   
+    let totallpaiss=document.getElementById("totallpaiss");
+    let totallpaisspopu=document.getElementById("totallpaisspopu");
     let id=REbutton.value; let elementoo=repositoriosPaisesFavoritos.findIndex(x=> x.id == id); let yuki=repositoriosPaisesFavoritosTotal.findIndex(y=> y.id == id);
     var buttonAntigg=document.getElementById(id);
     buttonAntigg.innerHTML="+";
     buttonAntigg.style.backgroundColor="rgba(0, 107, 247, 0.87)";
-    buttonAntigg.style.width="5%";
+    totaPopu=totaPopu+repositoriosPaisesFavoritos[id].populacao;
+totalP+=1;
+totallpaiss.innerHTML=totalP;
+totallpaisspopu.innerHTML=totaPopu;
 repositoriosPaisesFavoritos.splice(elementoo,1);repositoriosPaisesFavoritosTotal.splice(yuki,1);
 telaSuaLista.innerHTML=`<ul id="telaSuaLista1"><li>Bandeira</li><li>Nome</li><li>População</li><button type="button" id="enfeite"></button></ul>`;
 for(let i=0; i<repositoriosPaisesFavoritos.length;++i){   let listt=document.createElement("ul");
@@ -124,5 +136,5 @@ let REbutton=document.createElement("button"); REbutton.value=repositoriosPaises
 REbutton.addEventListener("click", x=>Remodelar(REbutton));
 }somaPopulacaofav(repositoriosPaisesFavoritosTotal);}
 function popula2(TotalPaises,totalPopu){
-    telaclasmudi.innerHTML=`<table id="table3">     <tr>    <td class="info22">População Mundial:</td>      <td class="info2" >${totalPopu}</td>       </tr> <tr>  <td class="info22">Total de paises :</td>  <td class="info2">${TotalPaises}</td></tr></table>`;
+    telaclasmudi.innerHTML=`<table id="table3">     <tr>    <td class="info22">População Mundial:</td>      <td class="info2" id="totallpaisspopu">${totalPopu}</td>       </tr> <tr>  <td class="info22">Total de paises :</td>  <td class="info2" id="totallpaiss">${TotalPaises}</td></tr></table>`;
 }
