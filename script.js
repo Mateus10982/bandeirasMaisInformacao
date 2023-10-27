@@ -32,6 +32,7 @@ function paiss(http){
             paises.sigla3= elementoPais.alpha3Code;
             paises.sigla2= elementoPais.alpha2Code;
             paises.capital= elementoPais.capital;
+            paises.regiao= elementoPais.region;
             paises.populacao= elementoPais.population;
             paises.bandeira=elementoPais.flags.png;
             paises.id=repositoriosPaises.length;
@@ -58,7 +59,7 @@ function lista(){
 for(let i=0; i< repositoriosPaises.length;++i){
     let option=document.createElement('option');
     option.value=`${repositoriosPaises[i].Nome}`;
-    option.innerHTML=`${repositoriosPaises[i].sigla},${repositoriosPaises[i].linguagens},${repositoriosPaises[i].TraducaoNome}`;
+    option.innerHTML=`${repositoriosPaises[i].sigla},${repositoriosPaises[i].linguagens},${repositoriosPaises[i].TraducaoNome},${repositoriosPaises[i].regiao}`;
     datalista.appendChild(option);} }
 function proc(repositoriosPaises){
     var procura=document.getElementById("procura");
